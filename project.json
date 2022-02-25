@@ -1,0 +1,15 @@
+{
+    "default": {
+        "core": "submodule",
+        "distribution_folder": "./deploy",
+        "flare": {},
+        "format": "1.0.0",
+        "pyodide": "v0.19.0",
+        "sources_folder": "./sources",
+        "vi": "v3.0.10"
+    },
+    "develop": {
+        "application_name": "myapp",
+        "version": "dev"
+    }
+}

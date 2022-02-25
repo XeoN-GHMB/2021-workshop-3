@@ -1,0 +1,12 @@
+# ViUR requirements
+-r viur/requirements.txt
+
+# Project requirements
+# These may have to be hashed with the tool hashin.
+# More information about hashed dependencies can be found here:
+# https://www.peterbe.com/plog/bestest-python-dependencies
+
+# google-cloud-kms==1.4.0
+# python-dateutil==2.8.1
+# cryptography==2.8.0
+# pyjwt==1.7.1
