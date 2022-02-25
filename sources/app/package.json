@@ -1,0 +1,25 @@
+{
+  "name": "base-vue",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "serve": "vite --port=8081",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@viur/viur-shoelace": "^2.0.0-beta.69-viur-3",
+    "axios": "^0.26.0",
+    "axios-cache-adapter": "^2.7.3",
+    "localforage": "^1.10.0",
+    "vue": "^3.2.31",
+    "vue-router": "^4.0.12"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.2.2",
+    "less": "^4.1.2",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-visualizer": "^5.5.4",
+    "vite": "^2.8.4"
+  }
+}

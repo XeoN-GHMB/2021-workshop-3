@@ -72,10 +72,29 @@ conf["viur.email.transportClass"] = email.EmailTransportSendInBlue
 securityheaders.addCspRule("style-src", "unsafe-inline", "enforce")  # yes, GitHub buttons need this...
 securityheaders.addCspRule("script-src", "buttons.github.io", "enforce")
 securityheaders.addCspRule("connect-src", "api.github.com", "enforce")
+securityheaders.addCspRule("connect-src", "data:", "enforce")
+securityheaders.addCspRule( "connect-src", "jsonplaceholder.typicode.com", "enforce" )  # demo
+
+#conf["viur.security.contentSecurityPolicy"] = {}
 
 # ------------------------------------------------------------------------------
 # Server startup
 #
+
+import os
+from viur.core import request
+from viur.core.utils import currentRequest
+
+if os.environ['GAE_ENV'] == "localdev":
+	"Whitelist vueJs Frontend server"
+	request.BrowseHandler.requestValidators = []
+	def preprocessRequestHandler(path):
+		currentRequest.get().response.headers["Access-Control-Allow-Origin"] = "http://localhost:8081"
+		currentRequest.get().response.headers["Access-Control-Allow-Credentials"] = "true"
+		return (path)
+
+	conf["viur.requestPreprocessor"] = preprocessRequestHandler
+
 
 import modules
 

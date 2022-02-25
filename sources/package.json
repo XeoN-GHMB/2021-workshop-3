@@ -1,0 +1,13 @@
+{
+  "name": "spa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build --prefix app",
+    "serve": "npm run serve --prefix app"
+  },
+  "author": "",
+  "license": "ISC"
+}
