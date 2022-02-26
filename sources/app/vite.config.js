@@ -3,10 +3,12 @@ import copy from 'rollup-plugin-copy'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import visualizer from 'rollup-plugin-visualizer'
+import del from 'rollup-plugin-delete'
 
 // https://vitejs.dev/config/
 
 const APPNAME = "app"
+console.log( path.join("..","..","deploy",'static',APPNAME,"*"))
 export default defineConfig(({command, mode})=>{
   let conf = {
       plugins: [
@@ -31,6 +33,11 @@ export default defineConfig(({command, mode})=>{
                       dest: path.join(__dirname, 'public','static',APPNAME, "viur-shoelace")
                   }
               ]
+          }),
+          del({
+              targets: path.join("..","..","deploy",'static',APPNAME,"*"),
+              hook: 'buildStart',
+              force:true
           }),
           vue({
               template: {
