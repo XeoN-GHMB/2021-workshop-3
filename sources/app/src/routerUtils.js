@@ -51,22 +51,37 @@ export function addModuleRoutes(routes){
 
 export function addRoute(path){
     let modulename = path.split("/").slice(-1)[0].split("_")[0]
+    let pathList = path.split("/")
 
     if (path.endsWith("_view")){
+        let pathTemplate = () => import(`./views/${modulename}_view.vue`)
+        if (pathList.length===2){
+            pathTemplate = () => import(`./views/${pathList[0]}/${modulename}_view.vue`)
+        }else if (pathList.length===3){
+            pathTemplate = () => import(`./views/${pathList[0]}/${pathList[1]}/${modulename}_view.vue`)
+        }
+
         return {
             path: `/${modulename}/view/:key`,
             name: `${modulename}_view`,
             meta:{"moduleName": modulename},
-            component: () => import(`./views/${modulename}/${modulename}_view.vue`),
+            component: pathTemplate,
             props:viewData
         }
     }else if (path.endsWith("_list")){
+        let pathTemplate = () => import(`./views/${modulename}_list.vue`)
+        if (pathList.length===2){
+            pathTemplate = () => import(`./views/${pathList[0]}/${modulename}_list.vue`)
+        }else if (pathList.length===3){
+            pathTemplate = () => import(`./views/${pathList[0]}/${pathList[1]}/${modulename}_list.vue`)
+        }
+
         return {
             path: `/${modulename}/list`,
             name: `${modulename}_list`,
             meta:{"moduleName": modulename},
-            component: () => import(`./views/${modulename}/${modulename}_list.vue`),
-            props:listData
+            component: pathTemplate,
+            props: listData
         }
     }else{
         throw Error("path must end with _view or _list")
