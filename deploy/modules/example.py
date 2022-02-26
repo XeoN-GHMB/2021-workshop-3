@@ -6,3 +6,4 @@ class Example(List):
 
 	def listFilter(self, query):
 		return query  # everyone can see everything!
+Example.json=True
