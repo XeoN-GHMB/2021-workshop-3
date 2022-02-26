@@ -57,7 +57,7 @@ export function addRoute(path){
             path: `/${modulename}/view/:key`,
             name: `${modulename}_view`,
             meta:{"moduleName": modulename},
-            component: () => import(`./views/${path}.vue`),
+            component: () => import(`./views/${modulename}/${modulename}_view.vue`),
             props:viewData
         }
     }else if (path.endsWith("_list")){
@@ -65,7 +65,7 @@ export function addRoute(path){
             path: `/${modulename}/list`,
             name: `${modulename}_list`,
             meta:{"moduleName": modulename},
-            component: () => import(`./views/${path}.vue`),
+            component: () => import(`./views/${modulename}/${modulename}_list.vue`),
             props:listData
         }
     }else{
