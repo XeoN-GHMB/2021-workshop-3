@@ -12,6 +12,7 @@
     "axios": "^0.26.0",
     "axios-cache-adapter": "^2.7.3",
     "localforage": "^1.10.0",
+    "rollup-plugin-delete": "^2.0.0",
     "vue": "^3.2.31",
     "vue-router": "^4.0.12"
   },
