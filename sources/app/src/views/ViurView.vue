@@ -52,7 +52,7 @@
     </code>
     <div style="margin-top:20px;">
     <ul>
-      <li><b>Request.get("$url", {...})</b>: Send data as get request, get requests are cacheable
+      <li><b>Request.get("$url", {....})</b>: Send data as get request, get requests are cacheable
       <div class="code"><code>
         Request.get("/json/user/view/self").then(<br>
             (resp) => {<br>
@@ -69,7 +69,7 @@
           <br> Internally, the list-request uses the get-request. You can add a dataObject with filters.</p>
         <div class="code">
         <code>
-          Request.list("modulename", {"key":"5sdf434636"}).then(<br>
+           Request.list("modulename", {dataObj:{"key": "ahNka3otcXVl...Cgw"}}).then(<br>
           (resp) => {<br>
               console.log(resp.data)<br>
           }).catch(<br>
