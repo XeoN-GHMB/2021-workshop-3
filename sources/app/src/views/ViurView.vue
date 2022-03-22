@@ -13,7 +13,20 @@
         <li><a href="https://github.com/viur-framework/awesome-viur" target="_blank" rel="noopener">awesome-viur</a></li>
     </ul>
 
+   <h2>Login Process</h2>
     <h3>1. Whitelist Vue dev-server</h3>
+    <p>Add the following code to the <strong>main.py</strong> from your Viur-project to allow the VueJS-Server to communicate with Viur!</p>
+
+    <p>First add the missing imports:</p>
+     <div class="code">
+      <code>
+        import os <br>
+        from viur.core import request <br>
+        from viur.core.utils import currentRequest
+      </code>
+    </div>
+
+    <p>Then add the preprocess Handler:</p>
     <div class="code">
       <code>
         if os.environ['GAE_ENV'] == "localdev":<br>
@@ -26,30 +39,58 @@
           conf["viur.requestPreprocessor"] = preprocessRequestHandler
       </code>
     </div>
-
-    <h3>Example Login Process</h3>
+    <br>
+    <p>Make sure that  <code>User.json = True</code> is added to your User-module</p>
+  <br>
+     <h3>2. Example Login Process</h3>
     <user-login></user-login>
-
-    <h3>Requesttypes</h3>
-    import:<br>
+    <hr>
+     <h3>Requesttypes</h3>
+    To use the requests, known from Jinja, you have to import this script:<br>
     <code>
       import Request from "@/request.js"
     </code>
     <div style="margin-top:20px;">
     <ul>
-      <li><b>Request.get</b>: Send data as get request, get requests are cacheable</li>
-      <li><b>Request.post</b>: Send data as post request</li>
-      <li><b>Request.securePost</b>: This request fetches an skey which is appended</li>
-      <li><b>Request.list</b>: send a list request with moduleName and dataObject</li>
-      <li><b>Request.view</b>: send a view request with moduleName and dataObject</li>
+      <li><b>Request.get("$url", {....})</b>: Send data as get request, get requests are cacheable
+      <div class="code"><code>
+        Request.get("/json/user/view/self").then(<br>
+            (resp) => {<br>
+                console.log(resp)<br>
+            }).catch(<br>
+                (error)=>{<br>
+                     console.log(error)<br>
+                })<br>
+      </code></div>
+
+      </li>
+      <li>
+        <p><b>Request.list("$modulename", {....})</b>: send a list request with moduleName and dataObject.
+          <br> Internally, the list-request uses the get-request. You can add a dataObject with filters.</p>
+        <div class="code">
+        <code>
+           Request.list("modulename", {dataObj:{"key": "ahNka3otcXVl...Cgw"}}).then(<br>
+          (resp) => {<br>
+              console.log(resp.data)<br>
+          }).catch(<br>
+              (error)=>{<br>
+                  console.log(error)<br>
+              })
+        </code>
+        </div>
+      </li>
+       <li><b>Request.post("$url",{...})</b>: Send data as post request</li>
+      <li><b>Request.view("$modulename","key", {...})</b>: send a view request with moduleName and key and dataObj</li>
+       <li><b>Request.securePost()</b>: This request fetches an skey which is appended</li>
     </ul>
     </div>
+    <hr>
 
     <h3>Views</h3>
     use addRoute to autogenerate the matching route for a view<br>
     This route will automatically fetch a skellist<br>
     <code>
-      addRoute("example/example_list")
+      addRoute("example/example_list.vue")
     </code>
 
     <div style="height:100px"></div>
@@ -92,9 +133,3 @@ ul.links li {
   margin: 0 10px;
 }
 </style>
-
-
-
-
-
-
